@@ -3,226 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Condomínio Bosques da Vila</title>
-
+    <title>Bosques da Vila - Assistente Bosquinho</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-        * {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f4f4f4;
-            color: #333;
             text-align: center;
-            padding-top: 80px; 
         }
-
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
             background-color: #D97A28;
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-        }
-
-        header img {
-            height: 60px;
-            margin-right: 10px;
-        }
-
-        header h1 {
-            color: white;
-            font-size: 22px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: left;
-        }
-
-        h1 {
-            color: #D97A28;
-            font-size: 28px;
-            text-align: center;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .contact-section {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .contact-section a {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 20px;
-            background-color: #D97A28;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
-        }
-
-        .contact-section a:hover {
-            background-color: #b86522;
-        }
-
-        #openChatbot {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #D97A28;
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
-        }
-
-        #openChatbot:hover {
-            background-color: #b86522;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            position: relative;
-            width: 860px;
-            max-width: 90%;
-            height: 80vh;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
+            padding: 20px 0;
             font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .bot-image {
+            width: 300px;
+            max-width: 100%;
+            display: block;
+            margin: 20px auto;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .contact-info {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .contact-info a {
+            text-decoration: none;
+            color: #D97A28;
+            font-weight: bold;
+        }
+        .chatbot-button {
+            background-color: #D97A28;
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            color: #333;
+            transition: 0.3s;
         }
-
-        /* Ajuste do chatbot */
-        #chatbotContainer {
-            flex: 1;
-            width: 100%;
-            height: 100%;
-            display: flex;
-        }
-
-        zapier-interfaces-chatbot-embed {
-            flex: 1;
-            width: 100%;
-            height: 100%;
-        }
-
-        @media (max-width: 900px) {
-            .modal-content {
-                width: 95%;
-                height: 85vh;
-            }
+        .chatbot-button:hover {
+            background-color: #b9611e;
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <img src="https://scontent.fcgh62-1.fna.fbcdn.net/v/t39.30808-6/305031273_593706652458156_5980297761822093153_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=g-SLf2BKL9YQ7kNvgGyPkEG&_nc_oc=AdhrQ3l7T-Sb2VOiOJarLEedy-dLrruMctISYJgWfimDxEOX3X-hjbkIHTh0Si4E4iyIvEzThbtpyEoy0WqclUIm&_nc_zt=23&_nc_ht=scontent.fcgh62-1.fna&_nc_gid=A5eoxbmdYv6DWtdiU_LeUWS&oh=00_AYC6Vdeo4xsHCTbGJapmdugSdJFxx71mVl0W7N0hv0b5Dw&oe=67BDCEB6" alt="Logo Bosques da Vila">
-        <h1>Condomínio Bosques da Vila</h1>
-    </header>
-
+    <header>Bosques da Vila - Assistente Bosquinho 🤖</header>
     <div class="container">
-        <h1>Bem-vindo ao Bosques da Vila</h1>
-        <p>Este é o portal digital do nosso condomínio. Aqui você pode acessar informações úteis, consultar regras do regulamento interno e falar com o chatbot <b>Bosquinho</b> para dúvidas rápidas.</p>
-
-        <div class="contact-section">
-            <h2>Fale com a Administração</h2>
-            <p>Em caso de dúvidas ou solicitações, você pode entrar em contato com a administração ou o síndico pelo WhatsApp.</p>
-            <a href="https://api.whatsapp.com/send?phone=5511995404209" target="_blank">🏢 Administração</a>
-            <a href="https://api.whatsapp.com/send?phone=5511975478151" target="_blank">👨‍💼 Síndico</a>
-            <div class="image-container">
-                <img src="bosquinho.jpg" alt="Mascote Bosquinho">
-            </div>
+        <img src="bosquinho.jpg" alt="Bosquinho, o assistente virtual" class="bot-image">
+        <p>Bem-vindo ao assistente virtual do gcondomínio Bosques da Vila! Como podemos te ajudar?</p>
+        <button class="chatbot-button" id="openChatbot">Falar com o Bosquinho</button>
+        <div class="contact-info">
+            <p>📞 <strong>Administração:</strong> <a href="https://api.whatsapp.com/send?phone=5511995404209" target="_blank">(11) 99540-4209</a></p>
+            <p>📞 <strong>Síndico:</strong> <a href="https://api.whatsapp.com/send?phone=5511975478151" target="_blank">(11) 97547-8151</a></p>
+            <p>✉️ <strong>Email:</strong> <a href="mailto:sindico@bosquesdavila.com.br">sindico@bosquesdavila.com.br</a></p>
         </div>
     </div>
-
-    <button id="openChatbot">💬 Falar com o Bosquinho 🤖</button>
-
-    <div id="chatbotModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="chatbotContainer"></div>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById("openChatbot").addEventListener("click", function() {
-            let chatbotContainer = document.getElementById("chatbotContainer");
-
-            if (!chatbotContainer.innerHTML.trim()) {
-                let script = document.createElement("script");
-                script.type = "module";
-                script.src = "https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js";
-                document.body.appendChild(script);
-
-                let chatbot = document.createElement("zapier-interfaces-chatbot-embed");
-                chatbot.setAttribute("is-popup", "false");
-                chatbot.setAttribute("chatbot-id", "cm74tco33000kvfc37adczfwo");
-
-                chatbotContainer.appendChild(chatbot);
-            }
-
-            document.getElementById("chatbotModal").style.display = "flex";
-        });
-
-        document.querySelector(".close").addEventListener("click", function() {
-            document.getElementById("chatbotModal").style.display = "none";
-        });
-    </script>
-
+    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+    <zapier-interfaces-chatbot-embed is-popup='false' chatbot-id='cm74tco33000kvfc37adczfwo' height='600px' width='860px'></zapier-interfaces-chatbot-embed>
 </body>
 </html>
