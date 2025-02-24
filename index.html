@@ -1,77 +1,104 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bosques da Vila - Assistente Bosquinho</title>
+    <title>Condomínio Bosques da Vila</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            text-align: center;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            text-align: center;
         }
         header {
             background-color: #D97A28;
             color: white;
-            padding: 20px 0;
+            padding: 20px;
             font-size: 24px;
-            font-weight: bold;
         }
         .container {
-            max-width: 900px;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .bot-image {
-            width: 300px;
-            max-width: 100%;
-            display: block;
-            margin: 20px auto;
-            border-radius: 15px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px;
         }
         .contact-info {
             margin-top: 20px;
             font-size: 18px;
         }
-        .contact-info a {
-            text-decoration: none;
-            color: #D97A28;
-            font-weight: bold;
-        }
-        .chatbot-button {
+        .botao-chatbot {
             background-color: #D97A28;
             color: white;
-            padding: 15px 20px;
-            font-size: 18px;
+            padding: 15px 30px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            transition: 0.3s;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-top: 20px;
         }
-        .chatbot-button:hover {
-            background-color: #b9611e;
+        .botao-chatbot:hover {
+            background-color: #b25d1c;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 860px;
+            height: 600px;
+            text-align: center;
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .mascote {
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <header>Bosques da Vila - Assistente Bosquinho 🤖</header>
+    <header>
+        <h1>Condomínio Bosques da Vila</h1>
+    </header>
     <div class="container">
-        <img src="bosquinho.jpg" alt="Bosquinho, o assistente virtual" class="bot-image">
-        <p>Bem-vindo ao assistente virtual do gcondomínio Bosques da Vila! Como podemos te ajudar?</p>
-        <button class="chatbot-button" id="openChatbot">Falar com o Bosquinho</button>
-        <div class="contact-info">
-            <p>📞 <strong>Administração:</strong> <a href="https://api.whatsapp.com/send?phone=5511995404209" target="_blank">(11) 99540-4209</a></p>
-            <p>📞 <strong>Síndico:</strong> <a href="https://api.whatsapp.com/send?phone=5511975478151" target="_blank">(11) 97547-8151</a></p>
-            <p>✉️ <strong>Email:</strong> <a href="mailto:sindico@bosquesdavila.com.br">sindico@bosquesdavila.com.br</a></p>
+        <p>Bem-vindo ao portal do condomínio Bosques da Vila! Aqui você encontra informações úteis e pode falar com a Administração.</p>
+        <p class="contact-info">📞 Administração: <a href="https://api.whatsapp.com/send?phone=5511995404209" target="_blank">WhatsApp da Administração</a></p>
+        <p class="contact-info">👨‍💼 Síndico: (11) 97547-8151 | 📧 <a href="mailto:sindico@bosquesdavila.com.br">sindico@bosquesdavila.com.br</a></p>
+        <p><a href="https://api.whatsapp.com/send?phone=5511975478151" target="_blank">WhatsApp do Síndico</a></p>
+        <img src="bosquinho.jpg" alt="Mascote Bosquinho" class="mascote">
+        <button class="botao-chatbot" id="openChatbot">Falar com o Bosquinho 🤖</button>
+    </div>
+    <div id="chatbotModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeChatbot">&times;</span>
+            <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
+            <zapier-interfaces-chatbot-embed is-popup='false' chatbot-id='cm74tco33000kvfc37adczfwo' height='100%' width='100%'></zapier-interfaces-chatbot-embed>
         </div>
     </div>
-    <script async type='module' src='https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js'></script>
-    <zapier-interfaces-chatbot-embed is-popup='false' chatbot-id='cm74tco33000kvfc37adczfwo' height='600px' width='860px'></zapier-interfaces-chatbot-embed>
+    <script>
+        document.getElementById("openChatbot").addEventListener("click", function() {
+            document.getElementById("chatbotModal").style.display = "block";
+        });
+        document.getElementById("closeChatbot").addEventListener("click", function() {
+            document.getElementById("chatbotModal").style.display = "none";
+        });
+    </script>
 </body>
 </html>
