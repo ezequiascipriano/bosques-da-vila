@@ -232,12 +232,14 @@
 				<p style="font-weight: bold;">Ao clicar em "Li e Concordo", você aceita os termos e poderá utilizar o Bosquinho.</p>
 			</div>
 			<div style="text-align: center; padding: 15px;">
-				<button id="agreeButton" class="chatbot-button" style="display: none;">Li e Concordo</button>
-				<button id="disagreeButton" class="chatbot-button" style="background-color: #888;">Li e Não Concordo</button>
+				<button id="agreeButton" class="chatbot-button" >Li e Concordo</button>
+				<button id="disagreeButton" class="chatbot-button" style="background-color: #888;">Li e Não Concordo</button>				
 			</div>
 		</div>
 	</div>
 
+
+		
 	<script>
 		document.getElementById("openChatbot").addEventListener("click", function() {
 			let termsAccepted = localStorage.getItem("termsAccepted");
@@ -245,14 +247,14 @@
 			if (!termsAccepted) {
 				document.getElementById("termsModal").style.display = "flex";
 			} else {
-				loadChatbot();
+				openChatbotModal();
 			}
 		});
 
 		document.getElementById("agreeButton").addEventListener("click", function() {
 			localStorage.setItem("termsAccepted", "true");
 			document.getElementById("termsModal").style.display = "none";
-			loadChatbot();
+			openChatbotModal();
 		});
 
 		document.getElementById("disagreeButton").addEventListener("click", function() {
@@ -264,7 +266,13 @@
 			document.getElementById("termsModal").style.display = "none";
 		});
 
-		function loadChatbot() {
+		document.getElementById("closeChatbot").addEventListener("click", function() {
+			document.getElementById("chatbotModal").style.display = "none";
+		});
+
+		function openChatbotModal() {
+			document.getElementById("chatbotModal").style.display = "flex";
+
 			let chatbotContainer = document.getElementById("chatbotContainer");
 
 			if (!chatbotContainer.innerHTML.trim()) {
@@ -279,8 +287,6 @@
 
 				chatbotContainer.appendChild(chatbot);
 			}
-
-			document.getElementById("chatbotModal").style.display = "flex";
 		}
 
 		// Habilitar botão "Li e Concordo" apenas ao rolar até o final
@@ -291,6 +297,44 @@
 			if (termsText.scrollHeight - termsText.scrollTop <= termsText.clientHeight + 5) {
 				agreeButton.style.display = "inline-block";
 			}
+		});
+	</script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var openChatbotButton = document.getElementById("openChatbot");
+			var chatbotModal = document.getElementById("chatbotModal");
+			var closeButtons = document.querySelectorAll(".close");
+			const termsText = document.getElementById("termsText");
+			const agreeButton = document.getElementById("agreeButton");
+
+			if (termsText && agreeButton) {
+				termsText.addEventListener("scroll", function () {
+					// Verifica se o usuário rolou até o final do texto
+					if (termsText.scrollTop + termsText.clientHeight >= termsText.scrollHeight) {
+						agreeButton.disabled = false; // Habilita o botão
+					}
+				});
+			}
+
+			// Abre o modal ao clicar no botão
+			openChatbotButton.addEventListener("click", function () {
+				chatbotModal.style.display = "flex";
+			});
+
+			// Fecha o modal ao clicar no botão de fechar
+			closeButtons.forEach(function (btn) {
+				btn.addEventListener("click", function () {
+					chatbotModal.style.display = "none";
+				});
+			});
+
+			// Fecha o modal ao clicar fora dele
+			window.addEventListener("click", function (event) {
+				if (event.target === chatbotModal) {
+					chatbotModal.style.display = "none";
+				}
+			});
 		});
 	</script>
 </body>
