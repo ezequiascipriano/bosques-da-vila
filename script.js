@@ -40,7 +40,7 @@ function openChatbotModal() {
 
         let chatbot = document.createElement("zapier-interfaces-chatbot-embed");
         chatbot.setAttribute("is-popup", "false");
-        chatbot.setAttribute("chatbot-id", "cm74tco33000kvfc37adczfwo");
+        chatbot.setAttribute("chatbot-id", "cm7xz18d100089x36l9v6fohn");
 
         chatbotContainer.appendChild(chatbot);
     }
